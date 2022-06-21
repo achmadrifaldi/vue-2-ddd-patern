@@ -1,7 +1,7 @@
 <template>
   <section class="main">
     <img width="150" alt="Vue logo" src="@/modules/app/assets/logo.png" />
-    <h1>Welcome to Your Vue.js DDD App</h1>
+    <h1>{{ home_title }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -40,8 +40,33 @@
 </template>
 
 <script>
+// Vuex
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'HomeUI',
+  computed: {
+    ...mapGetters({
+      home_title: 'home/home_title',
+    }),
+  },
+  methods: {
+    /**
+     * @description Fetch Get Title
+     *
+     * @return {void}
+     */
+    fetchTitle() {
+      try {
+        this.$store.dispatch('home/home_getTitle');
+      } catch (err) {
+        this.$store.dispatch('errorHandler/errorHandler_postMessage', err);
+      }
+    },
+  },
+  created() {
+    this.fetchTitle();
+  },
 };
 </script>
 
