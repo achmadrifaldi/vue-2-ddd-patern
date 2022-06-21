@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from '@/plugins/axios/axios';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,10 @@ function loadStores() {
 }
 
 const modules = loadStores();
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules,
 });
+
+store.$api = axios;
+
+export default store;

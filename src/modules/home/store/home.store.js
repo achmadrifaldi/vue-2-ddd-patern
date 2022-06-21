@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const namespaced = true;
 
 const state = {
@@ -6,8 +7,8 @@ const state = {
 };
 
 const getters = {
-  home_title: state => state.home_title,
-  home_loading: state => state.home_loading,
+  home_title: (state) => state.home_title,
+  home_loading: (state) => state.home_loading,
 };
 
 const mutations = {
@@ -29,12 +30,13 @@ const actions = {
    *
    * @return {any}
    */
-
-  home_getTitle: async function({ commit }) {
+  async home_getTitle({ commit }) {
     commit('hoem_SET_LOADING', true);
 
     try {
       commit('home_SET_TITLE', 'Welcome to Your Vue.js DDD App');
+
+      return Promise.resolve;
     } catch (err) {
       return Promise.reject(err);
     } finally {
